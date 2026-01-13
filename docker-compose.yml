@@ -1,0 +1,23 @@
+services:
+  excel-ai:
+    build: .
+    container_name: excel-ai-app
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}
+      - AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT}
+    env_file:
+      - .env
+    volumes:
+      # Mount config for easy model updates without rebuild
+      - ./config.yaml:/app/config.yaml
+    restart: unless-stopped
+    # Use host network to access Ollama running on host machine
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - excel-ai-network
+
+networks:
+  excel-ai-network:
+    driver: bridge

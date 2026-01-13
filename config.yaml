@@ -1,0 +1,46 @@
+llm_providers:
+  ollama:
+    display_name: "Ollama"
+    base_url: "http://host.docker.internal:11434"
+    models:
+      - "nemotron-3-nano:30b"
+      - "llama3.1:latest"
+    requires_api_key: false
+  
+  openai:
+    display_name: "OpenAI"
+    models:
+      - "gpt-4o-mini"
+      - "gpt-4o"
+      - "gpt-4.1-nano"
+      - "gpt-4.1-mini"
+      - "gpt-4.1"
+      - "gpt-5-nano"
+      - "gpt-5-mini"
+      - "gpt-5"
+      - "o3-mini"
+      - "o3"
+      - "o4-mini"
+      - "o4"
+    requires_api_key: true
+    env_var: "OPENAI_API_KEY"
+  
+  azure_openai:
+    display_name: "Azure OpenAI"
+    models:
+      - "gpt-4o-mini"
+      - "gpt-4o"
+      - "gpt-4.1-nano"
+      - "gpt-4.1-mini"
+      - "gpt-4.1"
+      - "gpt-5-nano"
+      - "gpt-5-mini"
+      - "gpt-5"
+      - "o3-mini"
+      - "o3"
+      - "o4-mini"
+      - "o4"
+    requires_api_key: true
+    env_var: "AZURE_OPENAI_API_KEY"
+    api_version: "2024-02-15-preview"
+    endpoint_env_var: "AZURE_OPENAI_ENDPOINT"

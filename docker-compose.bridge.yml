@@ -1,0 +1,26 @@
+# Alternative: Use bridge network with host.docker.internal
+# Use this if host network doesn't work on your system
+
+services:
+  excel-ai:
+    build: .
+    container_name: excel-ai-app
+    ports:
+      - "8501:8501"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}
+      - AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT}
+    env_file:
+      - .env
+    volumes:
+      - ./config.yaml:/app/config.yaml
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - excel-ai-network
+
+networks:
+  excel-ai-network:
+    driver: bridge
